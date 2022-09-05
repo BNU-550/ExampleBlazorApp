@@ -6,7 +6,7 @@ namespace ExampleBlazorApp.Models
     {
         public int Id { get; set; } = 0;
 
-        [StringLength(30), Required]
+        [StringLength(60), Required]
         public string Name { get; set; } = String.Empty;
         
         [StringLength(255)]
