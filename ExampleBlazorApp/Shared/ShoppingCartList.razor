@@ -1,0 +1,29 @@
+﻿@using ExampleBlazorApp.Services
+@* UI Section *@
+
+<br/>
+<div class="col-4">
+	<table class="table table-bordered">
+		<tr>
+			<th>Name</th>
+			<th class="text-center">Quantity</th>
+			<th class="text-center">Price</th>
+			<th>Action</th>
+		</tr>
+		@foreach(ShoppingItem item in Items)
+		{
+		   // display shopping item as table row
+		}
+
+	</table>
+</div>
+
+@* Code Section *@
+@code
+{
+
+    [EditorRequired]
+    [Parameter]
+    public List<ShoppingItem> Items { get; set; } = CartService.SelectedItems.ToList();
+}
+
