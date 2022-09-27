@@ -1,0 +1,22 @@
+﻿<tr>
+    <td>@Item.Product.Name</td>
+    <td class="text-center">@Item.Quantity</td>
+    <td class="text-center">@Item.PurchasePrice.ToString("c")</td>
+    <td>
+        <button class="btn btn-primary"
+                style="background-color:green" type="button">Increase
+        </button>
+        <button class="btn btn-warning"
+            style="background-color:orange">Decrease
+        </button>
+        <button class="btn btn-danger text-center" 
+            style="background-color:red">Remove
+        </button>
+    </td>
+</tr>
+
+@code 
+{
+    [Parameter]
+    public ShoppingItem Item { get; set; }
+}

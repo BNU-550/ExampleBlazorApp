@@ -2,7 +2,7 @@
 @* UI Section *@
 
 <br/>
-<div class="col-4">
+<div class="col-6">
 	<table class="table table-bordered">
 		<tr>
 			<th>Name</th>
@@ -12,7 +12,7 @@
 		</tr>
 		@foreach(ShoppingItem item in Items)
 		{
-		   // display shopping item as table row
+		   <ItemView Item="@item"></ItemView>
 		}
 
 	</table>
