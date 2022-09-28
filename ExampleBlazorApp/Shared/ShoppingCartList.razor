@@ -4,26 +4,51 @@
 <br/>
 <div class="col-6">
 	<table class="table table-bordered">
-		<tr>
-			<th>Name</th>
-			<th class="text-center">Quantity</th>
-			<th class="text-center">Price</th>
-			<th>Action</th>
-		</tr>
-		@foreach(ShoppingItem item in Items)
-		{
-		   <ItemView Item="@item"></ItemView>
-		}
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th class="text-center">Quantity</th>
+				<th class="text-center">Price</th>
+				<th class="text-center">Cost</th>
+				<th>Action</th>
+			</tr>
 
+		</thead>
+		<tbody>
+			@foreach (ShoppingItem item in Items)
+			{
+				if(item.Quantity > 0)
+				{
+					<ItemView Item="@item" OnQuantityChanged="OnQuantityChanged"></ItemView>
+				}
+			}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="3" style="text-align:end">Total Cost</th>
+				<th>@totalCost.ToString("c")</th>
+			</tr>
+		</tfoot>
 	</table>
 </div>
 
 @* Code Section *@
 @code
 {
+	private Decimal totalCost { get; set; }
 
-    [EditorRequired]
-    [Parameter]
-    public List<ShoppingItem> Items { get; set; } = CartService.SelectedItems.ToList();
+	[EditorRequired]
+	[Parameter]
+	public List<ShoppingItem> Items { get; set; } = CartService.SelectedItems.ToList();
+
+	protected override void OnInitialized()
+	{
+		OnQuantityChanged();
+	}
+
+	public void OnQuantityChanged()
+	{
+		totalCost = @Items.Sum(item => item.PurchasePrice * item.Quantity);
+	}
 }
 

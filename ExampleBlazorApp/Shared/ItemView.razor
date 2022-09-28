@@ -1,22 +1,61 @@
-﻿<tr>
-    <td>@Item.Product.Name</td>
-    <td class="text-center">@Item.Quantity</td>
-    <td class="text-center">@Item.PurchasePrice.ToString("c")</td>
-    <td>
-        <button class="btn btn-primary"
-                style="background-color:green" type="button">Increase
-        </button>
-        <button class="btn btn-warning"
-            style="background-color:orange">Decrease
-        </button>
-        <button class="btn btn-danger text-center" 
-            style="background-color:red">Remove
-        </button>
-    </td>
-</tr>
+﻿@if(Item.Quantity > 0)
+{
+    <tr>
+        <td>@Item.Product.Name</td>
+        <td class="text-center">@Item.Quantity</td>
+        <td class="text-center">@Item.PurchasePrice.ToString("c")</td>
+        <td class="text-center">@Cost().ToString("c")</td>
+        <td width="200">
+            <button class="btn btn-primary"  title="Increase"
+                @onclick="IncreaseQuantity"
+                style="background-color:green" type="button">
+                <i class="bi bi-arrow-up-circle"></i>
+            </button>
+            <button class="btn btn-primary" title="Decrease"
+                @onclick="DecreaseQuantity"
+                style="background-color:green">
+                <i class="bi bi-arrow-down-circle"></i>
+            </button>
+            <button class="btn btn-danger" title="Remove"
+                @onclick="RemoveItem"
+                    style="background-color:red">
+                <i class="bi bi-trash"></i>
+            </button>
+        </td>
+    </tr>
+}
+
 
 @code 
 {
     [Parameter]
     public ShoppingItem Item { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnQuantityChanged { get; set; }
+
+    private async Task IncreaseQuantity()
+    {
+        Item.Quantity++;
+        await OnQuantityChanged.InvokeAsync();
+    }
+
+    private async Task DecreaseQuantity()
+    {
+        if(Item.Quantity > 1)
+            Item.Quantity--;
+
+        await OnQuantityChanged.InvokeAsync();
+    }
+
+    private async Task RemoveItem()
+    {
+        Item.Quantity = 0;
+        await OnQuantityChanged.InvokeAsync();
+    }
+
+    private Decimal Cost()
+    {
+        return Item.Quantity * Item.PurchasePrice;
+    }
 }
