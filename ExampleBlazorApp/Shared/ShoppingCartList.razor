@@ -1,6 +1,8 @@
 ﻿@using ExampleBlazorApp.Services
 @* UI Section *@
 
+<h3>You have @Items.Count items in your cart</h3>
+
 <br/>
 <div class="col-6">
 	<table class="table table-bordered">
@@ -49,6 +51,7 @@
 	public void OnQuantityChanged()
 	{
 		totalCost = @Items.Sum(item => item.PurchasePrice * item.Quantity);
+		Items.RemoveAll(i => i.Quantity == 0);
 	}
 }
 

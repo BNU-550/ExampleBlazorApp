@@ -3,10 +3,11 @@
 @inject CartService CartService
 
 <h1>Shopping Cart</h1>
-<h3>You have @CartService.SelectedItems.Count items in your cart</h3>
+
 
 <ShoppingCartList Items="CartService.SelectedItems"></ShoppingCartList>
 
-@code {
-
+@code 
+{
+    private int itemCount = 0;
 }

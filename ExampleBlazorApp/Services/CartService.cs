@@ -6,6 +6,11 @@ namespace ExampleBlazorApp.Services
     {
         public static List<ShoppingItem> SelectedItems { get; set; } = new List<ShoppingItem>();
 
+        public static void RemoveFromCart(int productId)
+        {
+            SelectedItems.RemoveAll(x => x.Id == productId);
+        }
+
         public void AddProductToCart(int productId)
         {
             if(ProductInCart(productId) is false)
