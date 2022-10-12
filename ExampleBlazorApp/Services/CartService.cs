@@ -11,12 +11,10 @@ namespace ExampleBlazorApp.Services
             SelectedItems.RemoveAll(x => x.Id == productId);
         }
 
-        public void AddProductToCart(int productId)
+        public void AddProductToCart(Product product)
         {
-            if(ProductInCart(productId) is false)
+            if(ProductInCart(product) is false)
             {
-                var product = ProductService.Products.First(p => p.Id == productId);
-
                 ShoppingItem item = new ShoppingItem();
 
                 item.Product = product;
@@ -26,11 +24,11 @@ namespace ExampleBlazorApp.Services
             }
         }
 
-        private bool ProductInCart(int productId)
+        private bool ProductInCart(Product product)
         {
             foreach (ShoppingItem item in SelectedItems)
             {
-                if (item.Product.Id == productId)
+                if (item.Product.Id == product.Id)
                 {
                     item.Quantity++;
                     return true;

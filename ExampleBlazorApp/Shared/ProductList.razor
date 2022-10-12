@@ -1,4 +1,6 @@
-﻿@* UI Section *@
+﻿@inject ProductService Data
+
+@* UI Section *@
 
 <h3>Product List</h3>
 
@@ -13,5 +15,11 @@
 
     [EditorRequired]
     [Parameter]
-    public List<Product> Products { get; set; } = ProductService.Products.ToList();
+    public List<Product> Products { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Products = ProductService.GetProducts();
+    }
 }

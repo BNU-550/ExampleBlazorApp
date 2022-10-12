@@ -22,6 +22,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
 builder.Services.AddScoped<CartService>();
+builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();
 

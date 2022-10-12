@@ -6,14 +6,14 @@
     </div>
     <div class="card-body">
 
-        <h5 class="card-title">Book @product. : @product.Name</h5>
+        <h5 class="card-title">Book @product.Id : @product.Name</h5>
         <p class="card-text">@product.Description</p>
         <blockquote class="card-text"><strong>£@product.Price</strong></blockquote>
 
         @if (DisplayBuyButton)
         {
             <button class="btn btn-primary" type="button"
-                @onclick="()=> Buy(product.Id)">Buy</button>
+                @onclick="()=> Buy()">Buy</button>
         }
 
     </div>
@@ -27,8 +27,8 @@
     [Parameter]
     public bool DisplayBuyButton { get; set; } = true;
 
-    private void Buy(int productId)
+    private void Buy()
     {
-        CartService.AddProductToCart(productId);
+        CartService.AddProductToCart(product);
     }
 }
