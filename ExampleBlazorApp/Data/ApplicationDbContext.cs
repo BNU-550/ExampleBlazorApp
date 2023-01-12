@@ -11,6 +11,6 @@ namespace ExampleBlazorApp.Data
         {
         }
 
-        public DbSet<ExampleBlazorApp.Models.Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
